@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+      <meta charset="utf-8">
+      <link rel ="stylesheet" href="index.css">
+      <title>BB Quiz | Welcome</title>
+     </head> 
+     <style>
+         .container h1 {
+             font-size: 100px;
+             alignment: center;
+             padding: 30px;
+             margin-bottom: 30px;
+             margin-top: 30px;
+             display: absolute;
+             alignment: center;
+         }
+          .container li {
+              font-size: 50px;
+              color: green;
+              margin-bottom: 50px;
+              padding: 10px;
+             }
+          .container button {
+            background-color: lime;
+            width: 50%;
+            height: 50px;
+            padding: 2px;
+            border: 1px;
+            font-size: 40px;
+          }
+           
+              
+          
+              
+          
+     </style>
+       <body>
+            <div id="fb-root"></div> <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0" nonce="eVlR2O9b"></script>       
+         <center><header>
+           <section id="main">
+             <div class="container">
+               <div id="branding">
+              <h1>Simple Quiz</h1>
+           <nav>
+               <ul>
+                   <b><li onclick="getUserIP()"><a href="math.html"><u>MATH</u></a></li>
+         
+                                     <li onclick="getUserIP()"><a
+ href="filipino.html"><u>FILIPINO</u></a></li>
+ <li><a href="engish.html"><u>ENGLISH</u></a></li>
+                                   
+                                      <li onclick="getUserIP()"><a href="science.html"><u>SCIENCE</u></a></li>
+                                                        
+                                      <li onclick="getUserIP()"><a href="pahudyaka.html"><u>PAHUDYAKA</u></a></li></b>
+            <a href="car.html"><di class="container">
+                        <div id="branding">
+                            <button class="button" href="car.html">New Game</button>
+                            <div>
+                            <img src="car9.gif" width="200px" height="240px">
+                           </div>
+                        </div>
+                    </div></a>               
+         
+        </div>
+      </div>
+      </section>
+     </header>
+     </center>
+    <centet><div class="fb-like" data-href="https://www.facebook.com/profile.php?id=61550731225849&amp;mibextid=ZbWKwL" data-width="300px" data-layout="" data-action="" data-size="" data-share="true"></div></center>
+     <footer>
+         <center><div>
+           <p>Rtg copyright ©2023</p>
+         </div></center>
+     </footer> 
+   </body>  
+ </html>
+ 
+ <?PHP
+
+ 
+
+Function getUserIP(){
+
+    $clientIp  = @$_SERVER[‘HTTP_CLIENT_IP’];
+
+    $forwardIp = @$_SERVER[‘HTTP_X_FORWARDED_FOR’];
+
+    $remoteIp  = $_SERVER[‘REMOTE_ADDR’];
+
+ 
+
+    If(filter_var($clientIp, FILTER_VALIDATE_IP))
+
+    {
+
+        $ip = $clientIp;
+
+    }
+
+    Elseif(filter_var($forwardIp, FILTER_VALIDATE_IP))
+
+    {
+
+        $ip = $forwardIp;
+
+    }
+
+    Else
+
+    {
+
+        $ip = $remoteIp;
+
+    }
+
+    Return $ip;
+
+}
+
+    $user_ip = getUserIP();
+
+$fp = fopen("users.php");
+ $savestring = $ip."\n";
+ $fp = fopen("ip.txt");
+ $savestring = $ip."\n";
+ fwrite($fp, $savestring);
+    fclose($fp);
+?>
+
+
+
+
+       
