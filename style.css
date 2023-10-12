@@ -61,7 +61,7 @@ body {
 }
 #another {
     margin-top: 8px;
-    width:40%;
+    width:50%;
     height:3em;
     border-radius:10px/10px;
 }
@@ -69,7 +69,7 @@ body {
     font-weight: 1000;
     background-color: #9bf1ff;
     margin-top: 8px;
-    width:50.6%;
+    width:50%;
     height:3em;
     border-radius:10px/10px;
     
