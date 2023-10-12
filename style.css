@@ -146,3 +146,6 @@ p{margin-top:1em;}
     color: maroon;
     margin-bottom: 4em;    
 }
+.buttons{
+    align-items: center;
+    padding: 1em 1em 1em 1em;
