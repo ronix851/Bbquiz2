@@ -60,15 +60,15 @@ body {
     border-radius:10px/10px;
 }
 #another {
-    margin-top: 8px;
     width:100px
     height:3em;
     border-radius:10px/10px;
+    padding: 2px 2px 2px 2px;
 }
 #submit {
+    padding: 2px 2px 2px 2px;
     font-weight: 1000;
     background-color: #9bf1ff;
-    margin-top: 8px;
     width:100px;
     height:3em;
     border-radius:10px/10px;
