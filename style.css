@@ -11,7 +11,7 @@ body {
     background: url('bg.jpg') no-repeat center center fixed;
     rgb(180 , 180, 180) !important;
  }   
-#btns2, #gues1, #ps, #btns1, #word1, .word, .main pt-4, .title, p5 {display:flex;}    
+ #gues1, #ps, #btns1, #word1, .word, .main pt-4, .title, p5 {display:flex;}    
 
 .main {
     padding:0;
@@ -100,11 +100,16 @@ body {
 }
 p{margin-top:1em;}
 
-#tama{
+#tama {
     display: none;
     font-size: 1em; 
     font-weight:800; 
     color:green;
+      -webkit-animation-name: animatetop;
+	     -webkit-animation-duration: 2s;
+	     -animation-name: animatetop;
+	     -animation-duration: 2s;
+    ease-in-out: 2s;    
  }
     
 #time{
@@ -119,11 +124,16 @@ p{margin-top:1em;}
     color: night;
     margin-right: 2em;
    }
-#mali{
+#mali, #wala {
     display: none;
     font-size: 1em; 
     font-weight:800; 
     color:red;
+      -webkit-animation-name: animatetop;
+	     -webkit-animation-duration: 2s;
+	     -animation-name: animatetop;
+	     -animation-duration: 2s;
+	     
     }
 .title span {font-size:2px; color: blue;}
 #modal {
@@ -137,8 +147,8 @@ p{margin-top:1em;}
     margin: 10px 10px 10px 10px;
     border:5px solid;
     width: 400px;
-    
-}
+	}
+	
 #score2 {
     font-family: cursive;
     font-weight: 1000;
