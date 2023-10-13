@@ -40,6 +40,9 @@
             
             #mainContainer {
                 display:none;
+                 background:#1AA260;
+          
+                 
             }
             
             #scoreDiv {
@@ -61,7 +64,7 @@
             #cn {
                 height:50px;
                 width:50px;
-                background:red;
+                background:#ffff;
                 position:absolute;
                 right:-8px;
                 top:-8px;
@@ -115,7 +118,7 @@
             }
             
             .diffOpt {
-                background:green
+                background:green;
                 font-family:cursive;
                 font-size:20px;
                 text-align:center;
@@ -141,6 +144,7 @@
                     transform:translateY(-165px) rotate(360deg);
                 }
             }
+            #pso{font-size:20px; margin:0; padding:0;}
   
         </style>
     </head>
@@ -148,6 +152,8 @@
         <div id="scoreDiv">
             <span id="score">0</span>
             <img src="peso.png" id="cn">
+              <p id="pso">Peso</p>
+            
         </div>
         <div class="gameHome" id="startPage">
             <div id="gameTitle">BB Mia Kotse Drive</div>
@@ -177,14 +183,14 @@
       <h1>By Rtg &copy</h1>
     </div>
         </div>
-        <div id="mainContainer" style="background:#0f0" >
-            <img id="city" src="https://image.ibb.co/jCGU0y/cty.jpg">
+        <div id="mainContainer">
+            <img id="city" src="city.jpg">
             <canvas id="myCanvas" style="/*background:#9de732*/" ></canvas>
         </div>
-        <img class="aImg" id="t1" src="https://image.ibb.co/dZi5Ly/t1.png">
-        <img class="aImg" id="t2" src="https://image.ibb.co/jajjDJ/t2.png">
-        <img class="aImg" id="t3" src="https://image.ibb.co/it4jDJ/t5.png">
-        <img class="aImg" id="t4" src="https://image.ibb.co/ksy0nd/t4.png">
+        <img class="aImg" id="t1" src="t1.png">
+        <img class="aImg" id="t2" src="t2.png">
+        <img class="aImg" id="t3" src="t3.png">
+        <img class="aImg" id="t4" src="t1.png">
         <img class="aImg" id="c1" src="car2.png">
          <img class="aImg" id="c2" src="car3.png">
           <img class="aImg" id="c3" src="car4.png">
@@ -350,7 +356,7 @@
             }
             
             //Coin.....
-            var coinW = (w > 560) ? 75 : 60;
+            var coinW = (w > 260) ? 75 : 60;
             function CoinBuilder(start,lane){
                 this.src = coinSrc;
                 this.y = start;
@@ -384,7 +390,7 @@
                     this.y = stp;
                     this.h = 0;
                     this.w = 0;
-                    this.left = Math.random()*3;
+                    this.left = Math.random()*1;
                     this.dy = 0.5;
                     this.lane = Math.floor(1+Math.random()*5);
                 }
