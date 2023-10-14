@@ -34,21 +34,20 @@
                 z-index: 100;
             }
             
-            .aImg {
-                display:none;
+            .aImg, .cImg {
+                display:none;              
             }
             
             #mainContainer {
-                display:none;
-                 background:#1AA260;
-          
-                 
+                display:none;                background-color:#6B8E23;
+           
+                             
             }
-            
+                                          
             #scoreDiv {
                 position:absolute;
                 right:0;
-                background:transparent;
+                background:#ffff;
                 display:inline-block;
                 border:3px solid red;
                 padding:3px 50px 3px 10px;
@@ -157,7 +156,7 @@
         </div>
         <div class="gameHome" id="startPage">
             <div id="gameTitle">BB Mia Kotse Drive</div>
-            <div><img src="car.gif" width="70px" height"100px"></div>
+            <div><img src="hehecar.png" width="70px" height"100px"></div>
             <button onclick="ld()" id="playBtn"><span style="font-size:18px">Loading Assets<br>Please Wait...<br>This may take a few seconds for first time</span></button><br>
             <div id="ldc"><div id="loading"></div></div>
            <b><p>Rotate your phone & tilt left/right. *- Itakilid ra ang phone wala ug tou mura ra ga-drive manubela. -*<br>Use arrow left/right on pc.</b><b>**Kung hinay ang signal, touchscreen lang.**</b></p>
@@ -174,6 +173,7 @@
                         gameHome.style.transform = "translateX("+hw+"px) rotate(90deg)";
                         scoreDiv.style.bottom = 0;
                         scoreDiv.style.transform = "rotate(90deg) translateX(40px)";
+                        
                     }
                 })();
             </script>
@@ -183,25 +183,41 @@
       <h1>By Rtg &copy</h1>
     </div>
         </div>
+        
         <div id="mainContainer">
-            <img id="city" src="city.jpg">
+            <img id="city" src="city.jpg">            
             <canvas id="myCanvas" style="/*background:#9de732*/" ></canvas>
         </div>
         <img class="aImg" id="t1" src="t1.png">
         <img class="aImg" id="t2" src="t2.png">
         <img class="aImg" id="t3" src="t3.png">
         <img class="aImg" id="t4" src="t1.png">
-        <img class="aImg" id="c1" src="car2.png">
-         <img class="aImg" id="c2" src="car3.png">
-          <img class="aImg" id="c3" src="car4.png">
-          <img class="aImg" id="c4" src="car5.png">
-          <img class="aImg" id="c5" src="car6.png">
+        <img class="cImg" id="c1" src="hehecar.png">
+         <img class="cImg" id="c2" src="car3.png">
+          <img class="cImg" id="c3" src="car4.png">
+          <img class="cImg" id="c4" src="car5.png">
+          <img class="cImg" id="c5" src="car6.png">
         <script>
-                   
+            
+         
+            const img2 = document.getElementById('city');
+           
+             const bg3Timeout = setTimeout(bg3, 35000);
+           
+            
+        const img1 = document.getElementById('c1');
+        const heheTimeout = setTimeout(hehe, 6000);
+       function hehe(){         
+        img1.src = 'drive.png'};
+                                        
         var ld;
         var loaded = false;
         
-        function done(){
+            function bg3() {             
+              img2.src = 'bg3.jpg'};            
+            
+        
+            function done(){
             document.getElementById("ldc").innerHTML="";
             document.getElementById("ldc").style.display = "none";
             document.getElementById("playBtn").innerHTML = "PLAY";
@@ -331,7 +347,8 @@
                 if(this.y >= h-20){
                     if(Math.abs(this.x-cx) <= carH && Math.abs(this.y-h+carH) <= carH){
                         clearInterval(intv);
-                        window.open('./gameover.html')
+                        window.open('naabot.html');
+                                           
                         setTimeout(function(){
                             document.getElementById("mainContainer").style.display = "none";
                             document.getElementById("startPage").style.display = "block";
@@ -356,7 +373,7 @@
             }
             
             //Coin.....
-            var coinW = (w > 260) ? 75 : 60;
+            var coinW = (w > 560) ? 75 : 60;
             function CoinBuilder(start,lane){
                 this.src = coinSrc;
                 this.y = start;
@@ -390,7 +407,7 @@
                     this.y = stp;
                     this.h = 0;
                     this.w = 0;
-                    this.left = Math.random()*1;
+                    this.left = Math.random()*3;
                     this.dy = 0.5;
                     this.lane = Math.floor(1+Math.random()*5);
                 }
