@@ -96,15 +96,15 @@ words.forEach(wordObj => {
 });
 
 // Variables
-
-let totalScore = document.getElementById("score2");
+let timeNow = document.getElementById("timenow");
+let today = document.getElementById("day");
+let userScore = document.getElementById("user-score");
 let main = document.getElementById("main1");
 let currentWordIndex = 0;
 let currentWord = "";
 let timeLeft = 30; 
 let timer;
 let scoreCount = 0;
-let userScore = document.getElementById("user-score"); 
 const scoreCountElement = document.querySelector("user-score strong");
 const wordElement = document.querySelector(".word");
 const hintElement = document.querySelector(".hint span");
@@ -114,6 +114,22 @@ const shuffleButton = document.querySelector(".btn-secondary");
 const submitButton = document.querySelector(".btn-dark");
 const restartBtn = document.getElementById("btns2");
 const closeBtn = document.getElementById("close2");
+
+
+
+const now = new Date();
+const daysOfWeek = [
+  'Domingo', 'Lunes', 'Martes', 'Myerkules', 'Huwebes', 'Byernes', 'Sabado'
+];
+const dayOfWeek = daysOfWeek[now.getDay()];
+const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
+
+const myList = document.getElementById('day');
+ const listItems = myList.querySelectorAll('daysOfWeek');
+  const itemColors = ['red', 'green', 'yellow', 'brown', 'light-blue', 'red', 'blue']; 
+listItems.forEach((item, index) => { item.style.color = itemColors[index]; });
+
+
 
 // Function to start a new round
 function newRound() {
@@ -130,7 +146,6 @@ function newRound() {
         }
    }
    
-    mali.style.display = "none";
     currentWord = words[currentWordIndex];
     wordElement.textContent = currentWord.scrambled;
     hintElement.textContent = currentWord.hint;
@@ -143,6 +158,8 @@ function newRound() {
     currentWordIndex++;
     userScore.innerHTML = "Score: " + scoreCount;
     score2.innerHTML = "Total Score:  " + scoreCount + " !                 " + "..Out of " + words.length + " Words.";
+    today.innerHTML = " " + dayOfWeek + " !";
+    timeNow.innerHTML = time;
 }
 
 // Function to update the time left
@@ -165,7 +182,11 @@ function updateTimeLeft() {
 
 // Event listeners
 shuffleButton.addEventListener("click", newRound);
-
+guess1.addEventListener("click", function(){
+    tama.style.display = "none";
+    mali.style.display = "none";
+    wala.style.display = "none";
+})
 restartBtn.onclick = function(){
     modal.style.display = "none";
     main1.style.display = "block";
