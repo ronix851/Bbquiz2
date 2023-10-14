@@ -12,7 +12,7 @@ body {
     rgb(180 , 180, 180) !important;
  }  
   
- #gues1, #ps, #btns1, #word1, .word, .main pt-4, .title, p5,  {display:flex;}  
+ #gues1, #ps, #btns1, #word1, .word, .main pt-4, .title, p5, #dayp,  {display:flex;}  
    
 #dayp, timep {
     padding: 2px 2px 2px 2px;
@@ -22,11 +22,11 @@ body {
 .main {
     padding:0;
     margin:0;
-    padding: .8em 1.5em 1.5em 1.5em;
+    padding: 8px 8px 8px 8px;
     margin:0;
     box-shadow: inset 0 0 0 8px #9bf1ff;
     border-radius: 20px/20px;
-    margin: 20px 20px 20px 20px;
+    margin: 5px 5px 5px 5px;
     border:5px solid;
        -webkit-animation-name: animatetop;
 	     -webkit-animation-duration: 2s;
@@ -43,12 +43,12 @@ body {
 }
 
 .card {
-    padding-top: 5px;
+    padding-top: 2px;
     border-radius: 20px !important;
 }
 
 .word {
-    font-size: 2em;
+    font-size: 1.8em;
     font-weight: 1000;
     letter-spacing: .2em;
     margin-top: 2px;
@@ -57,12 +57,15 @@ body {
 #word1 {
     border-radius: 10px/10px;
     color: black;
-    background-color: #eeff;   
-    }
+    background-color: #eeff;  
+    margin-top:6px;
+    margin-bottom:6px; 
+    align-items:center;
+     }
     
 #guess1 {
     background-color: #eeff;
-    margin-top: 9px;
+    margin-top: 2px;
     width: 98.1%;
     height:2em;
     font-size:20px;
@@ -70,7 +73,7 @@ body {
     border-radius:10px/10px;
 }
 #another {
-    margin-top: 8px;
+    margin-top: 2px;
     width:47%;
     height:3em;
     border-radius:10px/10px;
@@ -78,7 +81,7 @@ body {
 #submit {
     font-weight: 1000;
     background-color: #9bf1ff;
-    margin-top: 8px;
+    margin-top: 2px;
     width:50.6%;
     height:3em;
     border-radius:10px/10px;
@@ -87,9 +90,9 @@ body {
 #btns2 {
     font-weight: 1000;
     background-color: #9bf1ff;
-    margin-top: 8px;
-    width:50.6%;
-    height:3em;
+    margin-top: 2px;
+    width:40.6%;
+    height:2em;
     border-radius:10px/10px;
     box-shadow: inset 0 0 0 5px blue;
 }
@@ -98,7 +101,7 @@ body {
     background-color: #eeff;
     margin-top: 8px;
     width:30.6%;
-    height:3em;
+    height:2em;
     border-radius:10px/10px;
     box-shadow: inset 0 0 0 5px red;
 }
@@ -129,7 +132,7 @@ p{margin-top:1em;}
 #time strong{color: red;}
 
 #hint1 {
-    margin-top:4px;
+    margin-top:2px;
     font-weight: 900;
     color: #045D5D ;
     margin-right: 2em;
@@ -171,3 +174,7 @@ p{margin-top:1em;}
     }
 
 #timenow {font-weight:1000; margin-top:3px;}
+.title, #user-score {
+    margin-top:2px;
+    margin-bottom:2px;    
+    }
