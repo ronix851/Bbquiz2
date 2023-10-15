@@ -174,7 +174,7 @@ function updateTimeLeft() {
         clearInterval(timer);
         inputField.setAttribute("disabled", "disabled");
         submitButton.setAttribute("disabled", "disabled");
-        alert("Time's up! Try the next word.");
+        wala.style.display = "block";
         newRound();
         timeLeft = 30;
           function updateTime() {
