@@ -96,6 +96,8 @@ words.forEach(wordObj => {
 });
 
 // Variables
+
+
 let timeNow = document.getElementById("timenow");
 let today = document.getElementById("day");
 let userScore = document.getElementById("user-score");
@@ -124,12 +126,16 @@ const daysOfWeek = [
 const dayOfWeek = daysOfWeek[now.getDay()];
 const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
 
-const myList = document.getElementById('day');
- const listItems = myList.querySelectorAll('daysOfWeek');
-  const itemColors = ['red', 'green', 'yellow', 'brown', 'light-blue', 'red', 'blue']; 
+const myList = document.getElementById("day");
+ const listItems = myList.querySelectorAll("daysOfWeek");
+  const itemColors = ["red", "green", "yellow", "brown", "light-blue", "red", "blue"]; 
 listItems.forEach((item, index) => { item.style.color = itemColors[index]; });
 
 
+   function updateTime() {
+   now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
+    timeNow.innerHTML = time;
+}                        
 
 // Function to start a new round
 function newRound() {
@@ -171,8 +177,9 @@ function updateTimeLeft() {
         alert("Time's up! Try the next word.");
         newRound();
         timeLeft = 30;
-       
-              
+          function updateTime() {
+    timeNow.innerHTML = time;
+}        
     } else {
         timeLeft--;
         timeLeftElement.textContent = `${timeLeft} sec`;
@@ -182,24 +189,36 @@ function updateTimeLeft() {
 
 // Event listeners
 shuffleButton.addEventListener("click", newRound);
-guess1.addEventListener("click", function(){
+
+guess1.addEventListener("keypress", function(){  
+    if(event.key === 13 || "Enter") {
+     event.preventDefault();
+     document.getElementById("submit").click();         
+   }
+   guess1.addEventListener("click", function() {
     tama.style.display = "none";
     mali.style.display = "none";
     wala.style.display = "none";
-})
+    });  
+});
+
 restartBtn.onclick = function(){
     modal.style.display = "none";
     main1.style.display = "block";
     newRound();
+   
 };
 
 closeBtn.addEventListener("click", function(){
     window.open('https://www.facebook.com/profile.php?id=61550731225849&mibextid=ZbWKwL');
     });
+  
+     
       
-submitButton.addEventListener("click", function () {
+ submitButton.addEventListener("click", function () {
     const userGuess = inputField.value.toUpperCase();
     if (userGuess === currentWord.original) {
+        
         clearInterval(timer);
         inputField.setAttribute("disabled", "disabled");
         submitButton.setAttribute("disabled", "disabled");
@@ -207,6 +226,10 @@ submitButton.addEventListener("click", function () {
         scoreCount++;
         
         newRound();
+         function updateTime() {
+         now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
+    timeNow.innerHTML = time;
+}
         }
         
       else if(userGuess.length == 0){
@@ -224,3 +247,7 @@ submitButton.addEventListener("click", function () {
 
 // Initialize the game with the first word
 newRound();
+  function updateTime() {
+  now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
+    timeNow.innerHTML = time;
+}
