@@ -12,7 +12,7 @@ body {
     rgb(180 , 180, 180) !important;
  }  
   
- #gues1, #ps, #btns1, #word1, .word, .main pt-4, .title, p5, #dayp,  {display:flex;}  
+ #gues1, #ps, #btns1, #word1, .word, .main pt-4, .title, p5, #dayp, .btns {display:flex;}  
    
 #dayp, timep {
     padding: 2px 2px 2px 2px;
@@ -73,12 +73,15 @@ body {
     border-radius:10px/10px;
 }
 #another {
+    padding: 1px 1px 1px 1px;
+    font-size: 15px;
     margin-top: 2px;
-    width:47%;
+    width:48%;
     height:3em;
     border-radius:10px/10px;
 }
 #submit {
+    padding: 1px 1px 1px 1px;
     font-weight: 1000;
     background-color: #9bf1ff;
     margin-top: 2px;
