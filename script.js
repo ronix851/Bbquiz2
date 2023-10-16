@@ -1,3 +1,33 @@
+function showTime(){
+    var date = new Date();
+    var h = date.getHours(); // 0 - 23
+    var m = date.getMinutes(); // 0 - 59
+    var s = date.getSeconds(); // 0 - 59
+    var session = "AM";
+    
+    if(h == 0){
+        h = 12;
+    }
+    
+    if(h > 12){
+        h = h - 12;
+        session = "PM";
+    }
+    
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+    
+    var time = h + ":" + m + ":" + s + " " + session;
+    document.getElementById("MyClockDisplay").innerText = time;
+    document.getElementById("MyClockDisplay").textContent = time;
+    
+    setTimeout(showTime, 1000);
+    
+}
+
+showTime();
+
 // List of words to choose from
 const words = [  
     { original: "APPLE", hint: "A popular fruit" },
@@ -96,9 +126,8 @@ words.forEach(wordObj => {
 });
 
 // Variables
-
-
-let timeNow = document.getElementById("timenow");
+let prevAns = document.getElementById("pp") 
+let oras = document.getElementById("MyClockDisplay");
 let today = document.getElementById("day");
 let userScore = document.getElementById("user-score");
 let main = document.getElementById("main1");
@@ -116,13 +145,11 @@ const shuffleButton = document.querySelector(".btn-secondary");
 const submitButton = document.querySelector(".btn-dark");
 const restartBtn = document.getElementById("btns2");
 const closeBtn = document.getElementById("close2");
-
-
-
 const now = new Date();
 const daysOfWeek = [
   'Domingo', 'Lunes', 'Martes', 'Myerkules', 'Huwebes', 'Byernes', 'Sabado'
 ];
+
 const dayOfWeek = daysOfWeek[now.getDay()];
 const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
 
@@ -132,11 +159,8 @@ const myList = document.getElementById("day");
 listItems.forEach((item, index) => { item.style.color = itemColors[index]; });
 
 
-   function updateTime() {
-   now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
-    timeNow.innerHTML = time;
-}                        
 
+   
 // Function to start a new round
 function newRound() {
     if (currentWordIndex >= words.length) {
@@ -151,7 +175,7 @@ function newRound() {
        
         }
    }
-   
+    
     currentWord = words[currentWordIndex];
     wordElement.textContent = currentWord.scrambled;
     hintElement.textContent = currentWord.hint;
@@ -165,7 +189,8 @@ function newRound() {
     userScore.innerHTML = "Score: " + scoreCount;
     score2.innerHTML = "Total Score:  " + scoreCount + " !                 " + "..Out of " + words.length + " Words.";
     today.innerHTML = " " + dayOfWeek + " !";
-    timeNow.innerHTML = time;
+    oras.innerHTML = showTime;
+        
 }
 
 // Function to update the time left
@@ -174,32 +199,51 @@ function updateTimeLeft() {
         clearInterval(timer);
         inputField.setAttribute("disabled", "disabled");
         submitButton.setAttribute("disabled", "disabled");
-        wala.style.display = "block";
+        const prevAns = document.getElementById("pp");
+        prevAns.innerHTML = currentWord.original;
+        pp.style.display = "block";
+        timeOut.style.display = "block";
+        tama.style.display = "none";
+    mali.style.display ="none";
+    wala.style.display = "none";
         newRound();
         timeLeft = 30;
-          function updateTime() {
-    timeNow.innerHTML = time;
-}        
+        
+          
     } else {
         timeLeft--;
         timeLeftElement.textContent = `${timeLeft} sec`;
         
     }
 }
-
+another.addEventListener("click", function() {
+    const prevAns = document.getElementById("pp");
+        prevAns.innerHTML = currentWord.original;
+        pp.style.display = "block";
+    timeOut.style.display = "none";
+    tama.style.display = "none";
+    mali.style.display ="none";
+    wala.style.display = "block";
+    
+})
 // Event listeners
 shuffleButton.addEventListener("click", newRound);
 
 guess1.addEventListener("keypress", function(){  
     if(event.key === 13 || "Enter") {
      event.preventDefault();
-     document.getElementById("submit").click();         
+     document.getElementById("submit").click(); 
+                 
    }
    guess1.addEventListener("click", function() {
     tama.style.display = "none";
     mali.style.display = "none";
     wala.style.display = "none";
+    timeOut.style.display = "none";
+    
+    
     });  
+    
 });
 
 restartBtn.onclick = function(){
@@ -218,36 +262,40 @@ closeBtn.addEventListener("click", function(){
  submitButton.addEventListener("click", function () {
     const userGuess = inputField.value.toUpperCase();
     if (userGuess === currentWord.original) {
-        
+          
         clearInterval(timer);
         inputField.setAttribute("disabled", "disabled");
-        submitButton.setAttribute("disabled", "disabled");
+        submitButton.setAttribute("disabled", "disabled");   
+               
         tama.style.display = "block";
         scoreCount++;
+       
+                const prevAns = document.getElementById("pp");
+        prevAns.innerHTML = currentWord.original;
+        pp.style.display ="block";       
+        
         
         newRound();
-         function updateTime() {
-         now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
-    timeNow.innerHTML = time;
-}
+         
         }
         
       else if(userGuess.length == 0){
           wala.style.display = "block";
           tama.style.display = "none";     
           mali.style.display = "none";
-        
+          timeOut.style.display = "none";
+         
+          
     } else {    
+        timeOut.style.display = "none";
         wala.style.display = "none";
         tama.style.display = "none";     
         mali.style.display = "block";
+        
         
     }
 });
 
 // Initialize the game with the first word
 newRound();
-  function updateTime() {
-  now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
-    timeNow.innerHTML = time;
-}
+  
