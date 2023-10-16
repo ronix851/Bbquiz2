@@ -17,7 +17,11 @@
         <h1 class="title text-center"><strong>Word Scramble</strong><span>by Rtg™</span></h1>
           <div id="p3">
                     <p class="p1" id="user-score">Score: <span id ="score"><strong>0</strong></span></p>
-                    <p id="dayp">Hello. Have a nice<span id="day"></span></p><p id="timep">Oras: <span id="timenow"></span></p>
+                    <p id="dayp">Hello.. Have a nice <span id="day"> </span></p>
+                    <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+                    <p id="tama">Tama ka!👍🏁</p>
+                    <p id="previous">Previous Answer:<span id="pp"></span></p> 
+                    
                       </div>   
         <div class="container">
             <div class="card">
@@ -29,26 +33,44 @@
                     <p class="text-center word"></p>  
                     </div>
                     <div id="ps">
-                    <p id="hint1"class="hint">Hint: <span id="hint2"></span></p>
+                    <p id="hint1"class="hint">Hint: <span id="hint2"></span></p><!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>Page title</title>
+                    </head>
+                    <body>
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <title>Page title</title>
+                        </head>
+                        <body>
+                            
+                        </body>
+                        </html>
+                    </body>
+                    </html>
                  <p id="time" class="hint">Time Left:<span><strong>30 sec</strong></span></p>
                  </div>
-                 <p id="tama">Tama!👍🏁</p>
+               
                  <div>
                  <p id="mali">Mali!👎⛔️</p>
                  <p id="wala">Wala kay ge-Answer.🧐👇</p>
-                
+                <p id="timeOut">Naabtan ka sa timeout nga wala kay answer! 🧐👇</p>
                  </div>
                          <input class="form-control p-2" type="text" name="" id="guess1" placeholder="Enter your guess...">          
-                <div id="btns1" class="buttons text-center pb-5">
-                    <button type="button" id="another" class="btn btn-secondary mr-5">Another Word</button>
-                    <button type="button" id="submit" class="btn btn-dark">Submit Word</button>
+                <div id="btns1" type="submit " class="buttons text-center pb-5">
+                    <input type="submit" id="another" class="btn btn-secondary mr-5" value="Another Word"/>
+                    <input type="submit" id="submit" class="btn btn-dark"/>
+                    
                     </div>
                     <p5>Note: No space_ on answer/ Walang space_ sa answer.</p5>                   
                 
                </div>
             </div>
         </div>
-    </div>
     <div class="container" id="modal">
                             <p id="score2">""<span><strong>0</strong></span></p>
         <div class="btns">
