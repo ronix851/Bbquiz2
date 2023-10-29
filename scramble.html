@@ -58,7 +58,7 @@ body {
     color: black;
     background-color: #eeff;  
     margin-top:6px;
-    margin-bottom:6px; 
+    margin-bottom:10px; 
     align-items:center;
      }
     
@@ -74,9 +74,9 @@ body {
 #another {
     padding: 1px 1px 1px 1px;
     font-size: 15px;
-    margin-top: 2px;
+    margin-top: 3px;
     width:48%;
-    height:2.5em;
+    height:2.9em;
     border-radius:10px/10px;
 }
 #submit {
@@ -150,7 +150,23 @@ body {
     color:red;
     animation-duration: 3s;
     ease-in-out: 3s;
+    animation: shake 0.5s;
+  animation-iteration-count: infinite;
     }
+    
+    @keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
     
 .title span {font-size:2px; color: blue;}
 
@@ -222,11 +238,11 @@ body {
                  </div>
                
                  <div>
-                 <p id="mali">Mali!👎⛔️</p>
+                 <p class="target" id="mali">Mali!👎⛔️</p>
                  <p id="wala">Wala kay ge-Answer.🧐👇</p>
                 <p id="timeOut">Naabtan ka sa timeout nga wala kay answer! 🧐👇</p>
                  </div>
-                         <input class="form-control p-2" type="text" name="" id="guess1" placeholder="Enter your guess...">          
+                         <input class="form-control p-2" type="text" name="" id="guess1" placeholder="Enter your guess..." autofocus>          
                 <div id="btns1" type="submit " class="buttons text-center pb-5">
                     <input type="submit" id="another" class="btn btn-secondary mr-5" value="Another Word"/>
                     <input type="submit" id="submit" class="btn btn-dark"/>
@@ -244,8 +260,10 @@ body {
             <button id="close2">close</button>
         </div>      
     </div>
-
+    
 <script>
+    
+  
 
 // List of words to choose from
 const words = [  
@@ -327,7 +345,14 @@ const words = [
     { original: "FINISH", hint: "Ending" },      
 ];
 
+function shake() {
 
+            $("#submit").click(function(){
+               $(".target").effect( "shake", {times:4}, 1000 );
+            });
+				
+         };
+			
 
 function showTime(){
     var date = new Date();
@@ -534,7 +559,22 @@ closeBtn.addEventListener("click", function(){
           timeOut.style.display = "none";   
         tama.style.display = "block";
         scoreCount++;
-       
+        
+const input = document.getElementById('guess1');
+
+const start = input.value.length;
+input.setSelectionRange(start, start);
+input.focus();
+
+const btn = document.getElementById('btn');
+submitButton.addEventListener('click', function handleClick() {
+  
+  const start = input.value.length;
+
+  input.setSelectionRange(start, start);
+  input.focus();
+});
+      
                 const prevAns = document.getElementById("pp");
    prevAns.textContent = currentWord.original;
         pp.style.display ="block";       
@@ -564,11 +604,6 @@ closeBtn.addEventListener("click", function(){
 // Initialize the game with the first word
 newRound();
   
-
 </script>
-
-
-
 </body>
-
 </html>
