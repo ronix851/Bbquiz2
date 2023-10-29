@@ -545,7 +545,21 @@ closeBtn.addEventListener("click", function(){
     window.open('https://www.facebook.com/profile.php?id=61550731225849&mibextid=ZbWKwL');
     });
   
-     
+    const input = document.getElementById('guess1');
+
+const start = input.value.length;
+input.setSelectionRange(start, start);
+input.focus();
+
+const btn = document.getElementById('submit');
+btn.addEventListener('click', function handleClick() {
+  
+  const start = input.value.length;
+
+  input.setSelectionRange(start, start);
+  input.focus();
+});
+       
       
  submitButton.addEventListener("click", function () {
     const userGuess = inputField.value.toUpperCase();
@@ -560,21 +574,7 @@ closeBtn.addEventListener("click", function(){
         tama.style.display = "block";
         scoreCount++;
         
-const input = document.getElementById('guess1');
 
-const start = input.value.length;
-input.setSelectionRange(start, start);
-input.focus();
-
-const btn = document.getElementById('btn');
-submitButton.addEventListener('click', function handleClick() {
-  
-  const start = input.value.length;
-
-  input.setSelectionRange(start, start);
-  input.focus();
-});
-      
                 const prevAns = document.getElementById("pp");
    prevAns.textContent = currentWord.original;
         pp.style.display ="block";       
