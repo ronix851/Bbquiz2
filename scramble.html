@@ -58,7 +58,7 @@ body {
     color: black;
     background-color: #eeff;  
     margin-top:6px;
-    margin-bottom:10px; 
+    margin-bottom:6px; 
     align-items:center;
      }
     
@@ -74,9 +74,9 @@ body {
 #another {
     padding: 1px 1px 1px 1px;
     font-size: 15px;
-    margin-top: 3px;
+    margin-top: 2px;
     width:48%;
-    height:2.9em;
+    height:2.5em;
     border-radius:10px/10px;
 }
 #submit {
@@ -126,14 +126,6 @@ body {
     animation-duration: 3s;
     ease-in-out: 3s;
   }
-    
-#time{
-    font-size: 1em;
-  font-color: black;
-  font-weight: 500;
-  margin-top:2px;
-}
-#time strong{color: red;}
 
 #hint1 {
     margin-top:2px;
@@ -152,9 +144,9 @@ body {
     ease-in-out: 3s;
     animation: shake 0.5s;
   animation-iteration-count: infinite;
-    }
-    
-    @keyframes shake {
+}
+
+@keyframes shake {
   0% { transform: translate(1px, 1px) rotate(0deg); }
   10% { transform: translate(-1px, -2px) rotate(-1deg); }
   20% { transform: translate(-3px, 0px) rotate(1deg); }
@@ -167,6 +159,7 @@ body {
   90% { transform: translate(1px, 2px) rotate(0deg); }
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
+    
     
 .title span {font-size:2px; color: blue;}
 
@@ -205,7 +198,44 @@ body {
     letter-spacing: 3px;
 }
 
+.timer {
+    margin-top: 10px
+    
+}
+.timer > svg {
+    width: 70px;
+    height: 70px;
+}
 
+.timer > svg > circle {
+    fill: none;
+    stroke-opacity: 0.3;
+    stroke: red;
+    stroke-width: 2;
+    transform-origin: center center;
+    transform: rotate(-90deg);
+}
+
+.timer > svg > circle + circle {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    stroke-linecap: round;
+    stroke-opacity: 1;
+}
+
+.timer.animatable > svg > circle + circle {
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.timer > svg > text {
+    font-size: 1.5rem;
+    font-weight:1000;
+}
+
+.timer > svg > text + text {
+    font-size: .5rem;
+    font-weight:1000;
+}
 
 </style>
 
@@ -222,7 +252,15 @@ body {
                     <p id="tama">Tama ka!👍</p>
                     <p id="previous">Previous Answer:<span id="pp"></span></p> 
                     
-                      </div>   
+                      </div>  
+                      <center><div class="timer animatable">
+  <svg>
+    <circle cx="50%" cy="50%" r="30"/>
+    <circle cx="50%" cy="50%" r="30" pathLength="1" />
+    <text x="33" y="38" text-anchor="middle"><tspan id="timeLeft"></tspan></text>
+    <text x="34" y="49" text-anchor="middle">seconds Left</text>
+  </svg>
+</div></center>
         <div class="container">
             <div class="card">
                 <div class="container" id="main">
@@ -234,16 +272,17 @@ body {
                     </div>
                     <div id="ps">
                     <p id="hint1"class="hint">Hint: <span id="hint2"></span></p>                                                                                                                                                             
-                 <p id="time" class="hint">Time Left:<span><strong>30 sec</strong></span></p>
+               
                  </div>
                
                  <div>
-                 <p class="target" id="mali">Mali!👎⛔️</p>
+                 <p id="mali">Mali!👎⛔️</p>
                  <p id="wala">Wala kay ge-Answer.🧐👇</p>
                 <p id="timeOut">Naabtan ka sa timeout nga wala kay answer! 🧐👇</p>
                  </div>
-                         <input class="form-control p-2" type="text" name="" id="guess1" placeholder="Enter your guess..." autofocus>          
+                 <input class="form-control p-2" type="text" name="" id="guess1" placeholder="Enter your guess...">          
                 <div id="btns1" type="submit " class="buttons text-center pb-5">
+
                     <input type="submit" id="another" class="btn btn-secondary mr-5" value="Another Word"/>
                     <input type="submit" id="submit" class="btn btn-dark"/>
                     
@@ -263,7 +302,7 @@ body {
     
 <script>
     
-  
+    
 
 // List of words to choose from
 const words = [  
@@ -345,6 +384,8 @@ const words = [
     { original: "FINISH", hint: "Ending" },      
 ];
 
+
+
 function shake() {
 
             $("#submit").click(function(){
@@ -406,6 +447,8 @@ words.forEach(wordObj => {
 		
 
 // Variables
+let timeLeft = 30;
+let timer = document.getElementById('timeLeft');
 let prevAns = document.getElementById("pp") 
 let oras = document.getElementById("MyClockDisplay");
 let today = document.getElementById("day");
@@ -413,8 +456,6 @@ let userScore = document.getElementById("user-score");
 let main = document.getElementById("main1");
 let currentWordIndex = 0;
 let currentWord = "";
-let timeLeft = 30; 
-let timer;
 let scoreCount = 0;
 const scoreCountElement = document.querySelector("user-score strong");
 const wordElement = document.getElementById("word");
@@ -442,9 +483,44 @@ const finish = document.getElementById("modal"); function human(finish) {
     if (currentWordIndex >= words.length) {
         modal.style.display = "block";
     }
-    };
+    }; 
     
-   
+   function isTimeLeft() {
+  return timeLeft > -1;
+}
+  function runTimer(timerElement) {
+	const timerCircle = timerElement.querySelector('svg > circle + circle');
+	timerElement.classList.add('animatable');
+	timerCircle.style.strokeDashoffset = 1;
+    
+	let countdownTimer = setInterval(function(){
+		if(isTimeLeft()){
+			const timeRemaining = timeLeft--;
+			const normalizedTime = (30 - timeRemaining) / 30;
+      // for clockwise animation
+      // const normalizedTime = (timeRemaining //   
+           //60) / 60;
+			timerCircle.style.strokeDashoffset = normalizedTime;
+      timer.innerHTML = timeRemaining;
+		} else {
+			
+			inputField.setAttribute("disabled", "disabled");
+        submitButton.setAttribute("disabled", "disabled");
+        const prevAns = document.getElementById("pp");
+        prevAns.innerHTML = currentWord.original;
+        pp.style.display = "block";
+        timeOut.style.display = "block";
+        tama.style.display = "none";
+    mali.style.display ="none";
+    wala.style.display = "none";
+        newRound();
+        timeLeft = 30;     
+         
+		}  
+	}, 1000);
+} 
+runTimer(document.querySelector('.timer'));
+
 // Function to start a new round
 function newRound() {
     if (currentWordIndex >= words.length) {
@@ -463,6 +539,7 @@ function newRound() {
    }
 
     currentWordIndex = Math.floor(Math.random() * 74);
+    timer;
     currentWord = words[currentWordIndex];
     wordElement.textContent = currentWord.scrambled;
     hintElement.textContent = currentWord.hint;
@@ -470,39 +547,17 @@ function newRound() {
     inputField.value = "";
     inputField.removeAttribute("disabled");
     submitButton.removeAttribute("disabled");
-    clearInterval(timer);
-    timer = setInterval(updateTimeLeft, 1000);
+    clearInterval(timer);    
     currentWordIndex++;
     userScore.innerHTML = "Score: " + scoreCount;
     score2.innerHTML = "Total Score:  " + scoreCount + " !                 " + "..Out of " + words.length + " Words.";
     today.innerHTML = " " + dayOfWeek + " !";
     oras.innerHTML = "start time: " + time;
-        
+          
 }
 
 // Function to update the time left
-function updateTimeLeft() {
-    if (timeLeft <= 0) {
-        clearInterval(timer);
-        inputField.setAttribute("disabled", "disabled");
-        submitButton.setAttribute("disabled", "disabled");
-        const prevAns = document.getElementById("pp");
-        prevAns.innerHTML = currentWord.original;
-        pp.style.display = "block";
-        timeOut.style.display = "block";
-        tama.style.display = "none";
-    mali.style.display ="none";
-    wala.style.display = "none";
-        newRound();
-        timeLeft = 30;
-        
-          
-    } else {
-        timeLeft--;
-        timeLeftElement.textContent = `${timeLeft} sec`;
-        
-    }
-}
+
 another.addEventListener("click", function() {
     const prevAns = document.getElementById("pp");
         prevAns.innerHTML = currentWord.original;
@@ -520,7 +575,9 @@ guess1.addEventListener("keypress", function(){
     if(event.key === 13 || "Enter") {
      event.preventDefault();
      document.getElementById("submit").click(); 
-                 
+     const start = input.value.length;
+  input.setSelectionRange(start, start);
+  input.focus();         
    }
 
    guess1.addEventListener("click", function() {
@@ -544,24 +601,17 @@ restartBtn.onclick = function(){
 closeBtn.addEventListener("click", function(){
     window.open('https://www.facebook.com/profile.php?id=61550731225849&mibextid=ZbWKwL');
     });
-  
-    const input = document.getElementById('guess1');
 
+const input = document.getElementById('guess1');
 const start = input.value.length;
 input.setSelectionRange(start, start);
 input.focus();
-
-
-submitButton.addEventListener('click', function handleClick() {
-  
-  const start = input.value.length;
-
-  input.setSelectionRange(start, start);
-  input.focus();
-});
-       
       
  submitButton.addEventListener("click", function () {
+   const start = input.value.length;
+  input.setSelectionRange(start, start);
+  input.focus();
+  
     const userGuess = inputField.value.toUpperCase();
     if (userGuess === currentWord.original) {
           
@@ -573,8 +623,9 @@ submitButton.addEventListener('click', function handleClick() {
           timeOut.style.display = "none";   
         tama.style.display = "block";
         scoreCount++;
-        
+      
 
+      
                 const prevAns = document.getElementById("pp");
    prevAns.textContent = currentWord.original;
         pp.style.display ="block";       
@@ -604,6 +655,11 @@ submitButton.addEventListener('click', function handleClick() {
 // Initialize the game with the first word
 newRound();
   
+
 </script>
+
+
+
 </body>
+
 </html>
