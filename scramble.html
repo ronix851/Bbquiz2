@@ -24,7 +24,8 @@ body {
 }
 
 
-#main1 {   
+#main1 {  
+    display: none;
     padding: 8px 8px 8px 8px;
     margin:0;
     box-shadow: inset 0 0 0 8px #9bf1ff;
@@ -161,8 +162,8 @@ body {
 }
     
     
-.title span {font-size:2px; color: blue;}
-
+#rtg {font-size:2px; color: blue;}
+.title{font-size; 0.8em;}
 	
 #score2 {
     font-family: display;
@@ -172,7 +173,7 @@ body {
     margin-bottom: 4em;    
 }
 
-#day{
+#uName {
     font-size: 18px;
     font-family: cursive;
     font-weight:1000;
@@ -269,18 +270,66 @@ body {
     margin: 5px 5px 5px 5px;
     border:5px solid;	     
 }
+#intro {
+    font-size: 25px;
+    font-weight: 400;
+    color: night;
+    font-family: "Poppins", sans-serif;
+    }
+#label1 {
+    font-size: 20px;
+    font-weight: 400;
+    color: night;
+}
+#input1 {
+    margin: 1em 1em 1em 1em;
+    padding: 0.2em;
+    font-size: 1.5em;
+    width: 70%;  
+    border-radius: 10px/10px;
+    border: border-box;
+    box-shadow: inset 0 0 0 1px #9bf1ff;
+    }
+#playerButton {
+  background-color: #9bf1ff;
+    width: 40%;
+    height: 3em;
+    border-radius: 10px/10px;
+    border: border-box;
+    box-shadow: inset 0 0 0 1px gray;
+}
+ #uName {
+     font-size: 20px;
+     color: night;
+ }
+ 
 
 </style>
 
 </head>
 
 <body>
-	 
+	   <div id="introduction"> 
+              <center><h1 id="title">Word <span style="color:maroon"> S</span> <span style="color:black">C</span> <span style="color:blue">R</span> <span style="color:red">A</span> <span style="color:yellow">M</span><span style="color:gray">B</span><span style="color:#DADBDD">L</span><span style="color:#368bc1">E</span>
+            </h1>         
+              <label id="label1" for="name">Please enter a playername:</label>
+              <input id="input1" class="input" type="text" onchange="getUser()">
+              <input type="submit" value="Play" id="playerButton">        
+      </div>
+       <div id="intro2">
+           <center><p id="intro"></p></center>
+       </div>
     <div class="main" id="main1">
-        <h1 class="title text-center"><strong>Word Scramble</strong><span>by Rtg™</span></h1>
+        <h1 class="title text-center">
+        <span style="color:maroon">S</span> <span style="color:black">C</span> <span style="color:blue">R</span> <span style="color:red">A</span> <span style="color:yellow">M</span><span style="color:gray">B</span><span style="color:#DADBDD">L</span><span style="color:#368bc1">E</span>
+            
+            
+            
+            <span id="rtg">by Rtg™</span></h1>
           <div id="p3">
+            
                     <p class="p1" id="user-score">Score: <span id ="score"><strong>0</strong></span></p>
-                    <p id="dayp">Hello.. Have a nice <span id="day"> </span></p>
+                    <p id="dayp">Hello.. Have a nice <span id="day"> </span><span id="uName"> </span></p>
                     <span id="MyClockDisplay" class="clock" onload="showTime()"></span>
                     <p id="tama">Tama ka!👍</p>
                     <p id="previous">Previous Answer:<span id="pp"></span></p> 
@@ -313,12 +362,12 @@ body {
                  <p id="wala">Wala kay ge-Answer.🧐👇</p>
                 <p id="timeOut">Naabtan ka sa timeout nga wala kay answer! 🧐👇</p>
                  </div>
+                 <div>
                  <input class="form-control p-2" type="text" name="" id="guess1" placeholder="Enter your guess...">          
                 <div id="btns1" type="submit " class="buttons text-center pb-5">
-
                     <input type="submit" id="another" class="btn btn-secondary mr-5" value="Another Word"/>
-                    <input type="submit" id="submit" class="btn btn-dark"/>
-                    
+                    <input type="submit" id="submit" class="btn btn-dark"/>                  
+                    </div>
                     </div>
                     <p5>Note: No space_ on answer/ Walang space_ sa answer.</p5>                   
                 
@@ -335,9 +384,20 @@ body {
     </div>
   </div>
 <script>
-    
-    
+let userName = "";
+let main1 = document.getElementById("main1");
+let uname = document.getElementById("uName");
+let intro = document.getElementById("introduction");       
+let intrO = document.getElementById("intro");
 
+
+function getUser() {
+  let userName = document.querySelector('input').value;
+  introduction.style.display = "none";
+  main1.style.display = "block";
+  uname.innerHTML = userName + " !";
+   };
+   
 // List of words to choose from
 const words = [  
     { original: "APPLE", hint: "A popular fruit" },
@@ -418,17 +478,6 @@ const words = [
     { original: "FINISH", hint: "Ending" },      
 ];
 
-
-
-function shake() {
-
-            $("#submit").click(function(){
-               $(".target").effect( "shake", {times:4}, 1000 );
-            });
-				
-         };
-			
-
 function showTime(){
     var date = new Date();
     var h = date.getHours(); // 0 - 23
@@ -482,6 +531,7 @@ words.forEach(wordObj => {
 		
 
 // Variables
+let guess1 = document.getElementById("guess1");
 let btnOver2 = document.getElementById("another");
 let btnOver = document.getElementById("submit");
 let restartBtn = document.getElementById("btns2");
@@ -563,7 +613,8 @@ function newRound() {
          main1.style.display = "none"; 
          modal1.style.display = "block";                 
       }
-      
+     let userName = document.querySelector('input').value;
+    
     modal1.style.display = "none";
     currentWordIndex = (Math.floor(Math.random() * 75)*1);
     timer;
@@ -578,7 +629,7 @@ function newRound() {
     currentWordIndex++;
     userScore.innerHTML = "Score: " + scoreCount;
     score2.innerHTML = "Total Score:  " + scoreCount + " !                 " + "..Out of " + words.length + " Words.";
-    today.innerHTML = " " + dayOfWeek + " !";
+    today.innerHTML = " " + dayOfWeek + "  ";
     oras.innerHTML = "start time: " + time;
     
           
@@ -601,26 +652,13 @@ another.addEventListener("click", function() {
 // Event listeners
 shuffleButton.addEventListener("click", newRound);
 
-guess1.addEventListener("keypress", function(){  
-    if(event.key === 13 || "Enter") {
-     event.preventDefault();
-     document.getElementById("submit").click(); 
-     
-     const start = input.value.length;
-  input.setSelectionRange(start, start);
-  input.focus();         
-   }
-
    guess1.addEventListener("click", function() {
     tama.style.display = "none";
     mali.style.display = "none";
     wala.style.display = "none";
     timeOut.style.display = "none";
     check.style.display = "none";
-    
-    
-    });  
-    
+        
 });
 
 restartBtn.onclick = function(){
@@ -629,6 +667,13 @@ restartBtn.onclick = function(){
     newRound();
    
 };
+
+function getUser() {
+  let userName = document.querySelector('input').value;
+  introduction.style.display = "none";
+  main1.style.display = "block";
+  uname.innerHTML = userName + " !";
+   };
 
 closeBtn.addEventListener("click", function(){
     window.open('https://www.facebook.com/profile.php?id=61550731225849&mibextid=ZbWKwL');
@@ -639,12 +684,8 @@ const start = input.value.length;
 input.setSelectionRange(start, start);
 input.focus();
       
- submitButton.addEventListener("click", function () {
-   const start = input.value.length;
-  input.setSelectionRange(start, start);
-  input.focus();
-  
-    const userGuess = inputField.value.toUpperCase();
+submitButton.addEventListener("click", function () {
+      const userGuess = document.getElementById("guess1").value.toUpperCase();
     if (userGuess === currentWord.original) {        
         clearInterval(timer);
         inputField.setAttribute("disabled", "disabled");
@@ -680,6 +721,17 @@ input.focus();
     }
 });
 
+guess1.addEventListener("keypress", function(){  
+    if(event.key === 13 || "Enter") {
+     event.preventDefault();
+     document.getElementById("submit").click(); 
+     
+     const start = input.value.length;
+  input.setSelectionRange(start, start);
+  input.focus();    
+  guess1.value = "";     
+   }
+});
 // Initialize the game with the first word
 newRound();
   
