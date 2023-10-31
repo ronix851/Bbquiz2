@@ -14,7 +14,7 @@ body {
    
     align-items: center;
     justify-content: center;
-    background: url('bg.jpg') no-repeat center center fixed;
+    background: #F0FFFF;
     rgb(180 , 180, 180) !important;
  }  
   
@@ -24,7 +24,7 @@ body {
 }
 
 
-#main1, #modal{   
+#main1 {   
     padding: 8px 8px 8px 8px;
     margin:0;
     box-shadow: inset 0 0 0 8px #9bf1ff;
@@ -32,9 +32,8 @@ body {
     margin: 5px 5px 5px 5px;
     border:5px solid;	     
 }
-#modal{display: none; position: absolute;}
 
-.main pt-4 {
+.main pt-4 { 
     
     align-items: center;
     width: 80%;
@@ -47,6 +46,7 @@ body {
 }
 
 #word {
+    font-family: orbitron;
     font-size: 2em;
     font-weight: 1000;
     letter-spacing: .2em;
@@ -142,7 +142,7 @@ body {
     color:red;
     animation-duration: 3s;
     ease-in-out: 3s;
-    animation: shake 0.5s;
+    animation: shake 4s;
   animation-iteration-count: infinite;
 }
 
@@ -165,14 +165,16 @@ body {
 
 	
 #score2 {
-    font-family: cursive;
+    font-family: display;
     font-weight: 1000;
     font-size: 2.9em;
-    color: maroon;
+    color: red;
     margin-bottom: 4em;    
 }
 
 #day{
+    font-size: 18px;
+    font-family: cursive;
     font-weight:1000;
     color:#045D5D;
     }
@@ -190,6 +192,8 @@ body {
 #day {margin-left: 3px;}
      
 .clock {
+    border: border-box;
+    border-radius: 4px/4px;
     background: black;
     transform: translateX(-50%) translateY(-50%);
     color: #17D4FE;
@@ -199,7 +203,7 @@ body {
 }
 
 .timer {
-    margin-top: 10px
+    margin: 0;
     
 }
 .timer > svg {
@@ -228,13 +232,42 @@ body {
 }
 
 .timer > svg > text {
-    font-size: 1.5rem;
+    font-family: Orbitron;
+    font-size: 2rem;
     font-weight:1000;
 }
 
 .timer > svg > text + text {
     font-size: .5rem;
     font-weight:1000;
+}
+
+#check {
+    display: none;
+    
+    transform: scaleX(0); 
+    transform-origin: left; 
+    animation: grow-left cubic-bezier(0.785, 0.135, 0.15, 0.86) 1.2s forwards; 
+    animation-delay: 0.4s;
+}
+
+@keyframes grow-left {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(3);
+  }
+}
+
+.modal {
+    position: absolute;
+    padding: 8px 8px 8px 8px;
+    margin:0;
+    box-shadow: inset 0 0 0 8px #9bf1ff;
+    border-radius: 20px/20px;
+    margin: 5px 5px 5px 5px;
+    border:5px solid;	     
 }
 
 </style>
@@ -251,7 +284,7 @@ body {
                     <span id="MyClockDisplay" class="clock" onload="showTime()"></span>
                     <p id="tama">Tama ka!👍</p>
                     <p id="previous">Previous Answer:<span id="pp"></span></p> 
-                    
+                    <img id="check" src="check.jpg" width="15px" height="30px">
                       </div>  
                       <center><div class="timer animatable">
   <svg>
@@ -266,9 +299,9 @@ body {
                 <div class="container" id="main">
                     <h5>Guess the scrambled word...</h5>
                 </div>
-                <center><div class="card-body pl-5">
+                <div class="card-body pl-5">
                     <div class="container" id="word1">
-                    <p id="word" ></p>  
+                    <center><p id="word" ></p></center> 
                     </div>
                     <div id="ps">
                     <p id="hint1"class="hint">Hint: <span id="hint2"></span></p>                                                                                                                                                             
@@ -289,17 +322,18 @@ body {
                     </div>
                     <p5>Note: No space_ on answer/ Walang space_ sa answer.</p5>                   
                 
-               </div></center>
+               </div>
             </div>
         </div>
-    <div id="modal">
+   
+    <div class="modal" id="modal1">
                             <p id="score2">""<span><strong>0</strong></span></p>
         <div class="btns">
             <button id="btns2">Retart</button>
             <button id="close2">close</button>
         </div>      
     </div>
-    
+  </div>
 <script>
     
     
@@ -373,12 +407,12 @@ const words = [
     { original: "COMPARE", hint: "Match" },
     { original: "MATCH", hint: "🔥" },
     { original: "WHISTLE", hint: "🌬" },
-    { original: "WALLET", hint: "In my pocket" },
+    { original: "WALLET", hint: "In a pocket" },
     { original: "CRAYONS", hint: "Colors" },
     { original: "BELIEVE", hint: "To trust" },
     { original: "SUCCESS", hint: "An achievement" },
     { original: "ENVELOPE", hint: "✉️" },
-    { original: "RONALD", hint: "Name of the editor of this game" }, 
+    { original: "RONALD", hint: "Name of the developer of this game" }, 
     { original: "MAGNIFY", hint: "🔍" },
     { original: "ENHANCE", hint: "To develop" },
     { original: "FINISH", hint: "Ending" },      
@@ -426,6 +460,7 @@ showTime();
 
 another.onclick = function(){
     tama.style.display = "none";
+    check.style.display = "none";
 }
 
 function scrambleWord(word) {    
@@ -447,6 +482,11 @@ words.forEach(wordObj => {
 		
 
 // Variables
+let btnOver2 = document.getElementById("another");
+let btnOver = document.getElementById("submit");
+let restartBtn = document.getElementById("btns2");
+let score2 = document.getElementById("score2");
+let check = document.getElementById("check");
 let timeLeft = 30;
 let timer = document.getElementById('timeLeft');
 let prevAns = document.getElementById("pp") 
@@ -464,7 +504,6 @@ const timeLeftElement = document.querySelector(".hint strong");
 const inputField = document.querySelector("input");
 const shuffleButton = document.querySelector(".btn-secondary");
 const submitButton = document.querySelector(".btn-dark");
-const restartBtn = document.getElementById("btns2");
 const closeBtn = document.getElementById("close2");
 const now = new Date();
 const daysOfWeek = [
@@ -478,12 +517,6 @@ const myList = document.getElementById("day");
  const listItems = myList.querySelectorAll("daysOfWeek");
   const itemColors = ['red', 'green', 'yellow', 'brown', 'light-blue', 'red', 'blue']; 
 listItems.forEach((item, index) => { item.style.color = itemColors[index]; });
-
-const finish = document.getElementById("modal"); function human(finish) {
-    if (currentWordIndex >= words.length) {
-        modal.style.display = "block";
-    }
-    }; 
     
    function isTimeLeft() {
   return timeLeft > -1;
@@ -513,6 +546,7 @@ const finish = document.getElementById("modal"); function human(finish) {
         tama.style.display = "none";
     mali.style.display ="none";
     wala.style.display = "none";
+    check.style.display = "none";
         newRound();
         timeLeft = 30;     
          
@@ -523,22 +557,15 @@ runTimer(document.querySelector('.timer'));
 
 // Function to start a new round
 function newRound() {
-    if (currentWordIndex >= words.length) {
-        // If all words are used, reset the game
+    if (currentWordIndex >= words.length) {      
         currentWordIndex = 0;
-        clearInterval;
-        main1.style.display = "none"; 
-	const modal = document.getElementById("modal"); 
-        modal.style.display = "block";    
-        
-        
-        function totalScore(){
-        score2.innerHTML = "Total Score: " + scoreCount;
-       
-        }
-   }
-
-    currentWordIndex = Math.floor(Math.random() * 74);
+        clearInterval;              
+         main1.style.display = "none"; 
+         modal1.style.display = "block";                 
+      }
+      
+    modal1.style.display = "none";
+    currentWordIndex = (Math.floor(Math.random() * 75)*1);
     timer;
     currentWord = words[currentWordIndex];
     wordElement.textContent = currentWord.scrambled;
@@ -553,8 +580,10 @@ function newRound() {
     score2.innerHTML = "Total Score:  " + scoreCount + " !                 " + "..Out of " + words.length + " Words.";
     today.innerHTML = " " + dayOfWeek + " !";
     oras.innerHTML = "start time: " + time;
+    
           
 }
+
 
 // Function to update the time left
 
@@ -566,6 +595,7 @@ another.addEventListener("click", function() {
     tama.style.display = "none";
     mali.style.display ="none";
     wala.style.display = "block";
+    check.style.display = "none";
     
 })
 // Event listeners
@@ -575,6 +605,7 @@ guess1.addEventListener("keypress", function(){
     if(event.key === 13 || "Enter") {
      event.preventDefault();
      document.getElementById("submit").click(); 
+     
      const start = input.value.length;
   input.setSelectionRange(start, start);
   input.focus();         
@@ -585,6 +616,7 @@ guess1.addEventListener("keypress", function(){
     mali.style.display = "none";
     wala.style.display = "none";
     timeOut.style.display = "none";
+    check.style.display = "none";
     
     
     });  
@@ -592,7 +624,7 @@ guess1.addEventListener("keypress", function(){
 });
 
 restartBtn.onclick = function(){
-    modal.style.display = "none";
+    modal1.style.display = "none";
     main1.style.display = "block";
     newRound();
    
@@ -613,23 +645,20 @@ input.focus();
   input.focus();
   
     const userGuess = inputField.value.toUpperCase();
-    if (userGuess === currentWord.original) {
-          
+    if (userGuess === currentWord.original) {        
         clearInterval(timer);
         inputField.setAttribute("disabled", "disabled");
         submitButton.setAttribute("disabled", "disabled"); 
+      check.style.display = "block";
 	    wala.style.display = "none";
             mali.style.display = "none";
           timeOut.style.display = "none";   
         tama.style.display = "block";
         scoreCount++;
-      
-
-      
+         
                 const prevAns = document.getElementById("pp");
    prevAns.textContent = currentWord.original;
         pp.style.display ="block";       
-        
         
         newRound();
          
@@ -639,15 +668,14 @@ input.focus();
           wala.style.display = "block";
           tama.style.display = "none";     
           mali.style.display = "none";
-          timeOut.style.display = "none";
-         
-          
-    } else {    
+          timeOut.style.display = "none";           
+         check.style.display = "none";
+       } else {    
         timeOut.style.display = "none";
         wala.style.display = "none";
         tama.style.display = "none";     
         mali.style.display = "block";
-        
+        check.style.display = "none";
         
     }
 });
